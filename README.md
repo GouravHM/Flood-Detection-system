@@ -20,17 +20,20 @@ The system processes Pre-Flood and Post-Flood images to generate a **Damage Asse
 
 ## 📂 Project Structure
 ```text
-flood_detection/
-├── app/
-│   ├── app.py            # Main Web Application
-│   └── utils.py          # Image processing & GIS helper functions
+Flood-Detection-system/
+│
 ├── data/
-│   └── raw/              # Satellite Images (Sentinel-1 SAR)
-├── models/
-│   └── unet_model.py     # U-Net Neural Network Architecture
-├── src/
-│   ├── get_gee_data.py   # Script to download Sentinel-1 data from Google Earth Engine
-│   └── pipeline.py       # Training pipeline
-├── outputs/              # Generated Maps (HTML) and CSV Reports
-├── requirements.txt      # List of dependencies
-└── README.md             # Project Documentation
+│   └── raw/
+│       ├── pre_flood/     # Your Pre-flood TIF images go here
+│       └── post_flood/    # Your Post-flood TIF images go here
+│
+├── static/
+│   ├── style.css          # Styles
+│   └── script.js          # Frontend Logic
+│
+├── templates/
+│   └── index.html         # The Website
+│
+├── server.py              # THE BRAIN (Runs the whole app)
+├── requirements.txt       # Dependencies
+└── README.md              # Documentation
