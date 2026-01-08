@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Flood Detection System</title>
+    
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="hero-header">
+        <div class="overlay"></div>
+        <div class="header-content">
+            <h1>Flood Detection System</h1>
+            <p>Using SAR Satellite Data on Google Earth Engine (GEE)</p>
+            <a href="#info" class="btn-cta">Learn More</a>
+        </div>
+    </header>
+
+    <section id="info" class="section-container white-bg">
+        <div class="container split-layout">
+            <div class="text-block">
+                <h2>Understanding Flood Impact</h2>
+                <p>
+                    Flooding is one of the most devastating natural disasters, causing massive loss of life and infrastructure. 
+                    Our system uses <strong>Sentinel-1 Satellite Imagery</strong> to penetrate cloud cover and detect water bodies.
+                    <br><br>
+                    By comparing "Pre-Flood" (Dry) and "Post-Flood" (Wet) images, the AI identifies changes in land texture, highlighting 
+                    submerged areas in <span style="color:red; font-weight:bold;">RED</span>.
+                </p>
+                <div class="stats-row">
+                    <div class="stat"><i class="fa-solid fa-satellite"></i> Sentinel-1 Data</div>
+                    <div class="stat"><i class="fa-solid fa-satellite"></i> Sentinel-2 Data</div>
+                    <div class="stat"><i class="fa-solid fa-clock"></i> Real-time Detect</div>
+                </div>
+            </div>
+            <div class="image-block">
+                <img src="https://www.aljazeera.com/wp-content/uploads/2024/09/AFP__20240902__36FC3KC__v1__HighRes__IndiaWeatherFlood-1725289194.jpg?resize=1920%2C1440" alt="Flood Disaster">
+            </div>
+        </div>
+    </section>
+
+    <section id="region-tool" class="section-container gray-bg">
+        <div class="container">
+            <div class="section-header">
+                <h3><i class="fa-solid fa-map"></i> Regional Analysis</h3>
+                <p>Select a state to view the live flood map and statistics.</p>
+            </div>
+
+            <div class="control-bar">
+                <select id="regionSelect">
+                    <option value="Assam (Silchar)">Assam (Silchar)</option>
+                    <option value="Kerala (Kuttanad)">Kerala (Kuttanad)</option>
+                    <option value="Maharashtra (Mumbai)">Maharashtra (Mumbai)</option>
+                    <option value="Delhi (Yamuna)">Delhi (Yamuna)</option>
+                    <option value="Tamil Nadu (Chennai)">Tamil Nadu (Chennai)</option>
+                    <option value="Bihar (Kosi River)">Bihar (Kosi River)</option>
+                </select>
+                <button class="btn-primary" onclick="runRegionAnalysis()">
+                    Analyze Region
+                </button>
+            </div>
+
+            <div class="results-grid hidden" id="regionResults">
+                <div class="card map-card">
+                    <h4>Geospatial View</h4>
+                    <div id="regionMap" class="map-view"></div>
+                </div>
+                <div class="card graph-card">
+                    <h4>Impact Statistics</h4>
+                    <img id="regionGraph" src="" alt="Graph loading...">
+                    <div class="stat-box">
+                        <span id="regionPercent">0%</span> Inundated
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="upload-tool" class="section-container white-bg">
+        <div class="container">
+            <div class="section-header">
+                <h3><i class="fa-solid fa-upload"></i> Custom Detection</h3>
+                <p>Upload your own Satellite TIF/PNG files (Pre & Post) to detect floods.</p>
+            </div>
+
+            <div class="upload-controls">
+                <div class="file-group">
+                    <label>Pre-Flood Image</label>
+                    <input type="file" id="preFile" accept=".tif, .png, .jpg">
+                </div>
+                <div class="file-group">
+                    <label>Post-Flood Image</label>
+                    <input type="file" id="postFile" accept=".tif, .png, .jpg">
+                </div>
+                <button class="btn-primary" onclick="runUploadAnalysis()">
+                    Detect Flood
+                </button>
+            </div>
+
+            <div class="results-grid hidden" id="uploadResults">
+                <div class="card image-card">
+                    <h4>AI Detection Result</h4>
+                    <img id="uploadResultImg" src="" alt="Result">
+                </div>
+                <div class="card graph-card">
+                    <h4>Analysis Graph</h4>
+                    <img id="uploadGraph" src="" alt="Graph">
+                    <div class="stat-box">
+                        <span id="uploadPercent">0%</span> Inundated
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 FloodAI Project. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>
